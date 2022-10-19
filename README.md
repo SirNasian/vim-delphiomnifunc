@@ -34,6 +34,11 @@ and/or `:tselect` to jump directly to a tag.
 ## Usage
 When in insert mode in a file with the `.pas` extension, `ctrl-x ctrl-o` can be used to invoke the completion function.
 
+## Example
+If you want to try this plugin, without having to generate a `tags` file, I have set up an example with a `tags` file
+already in the `example` directory. If you open `example/src/Example.pas` in vim after installing this plugin, then you
+should be able to invoke the completion function on the incomplete lines.
+
 ## Known Issues
 - Generics are not handled.
 - Multiline declarations are not handled.

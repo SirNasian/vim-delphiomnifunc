@@ -1,0 +1,3 @@
+TClassA	src/ClassA.pas	/^	TClassA = class$/;"	c
+TClassB	src/ClassB.pas	/^	TClassB = class$/;"	c
+TClassC	src/ClassC.pas	/^	TClassC = class$/;"	c

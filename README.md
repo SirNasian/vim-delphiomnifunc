@@ -3,6 +3,8 @@ I couldn't find a nice completion plugin to handle Delphi and/or Object Pascal, 
 There's nothing particularly fancy here, this plugin simply adds a completion function that is bound to `omnifunc`
 for `*.pas` files.
 
+![Example](example/example.gif)
+
 ## Dependencies
 The only requirement for the completion function to work is a `tags` file that describes which source file each of the
 classes/record exist in, so that it can quickly parse the definition of the given class/record.
@@ -38,6 +40,8 @@ When in insert mode in a file with the `.pas` extension, `ctrl-x ctrl-o` can be 
 If you want to try this plugin, without having to generate a `tags` file, I have set up an example with a `tags` file
 already in the `example` directory. If you open `example/src/Example.pas` in vim after installing this plugin, then you
 should be able to invoke the completion function on the incomplete lines.
+
+![Example](example/example.gif)
 
 ## Known Issues
 - Generics are not handled.

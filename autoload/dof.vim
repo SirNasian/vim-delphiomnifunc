@@ -50,19 +50,36 @@ function! dof#GetClassMembers(tag)
 	return members
 endfunction
 
+function! dof#GetMatchingBracketChar(char)
+	let mapping = {'(': ')', ')': '(', '[': ']', ']': '[', '<': '>', '>': '<'}
+	return get(mapping, a:char, '')
+endfunction
+
 function! dof#GetTokenStack()
 	let index = col('.') - 1
 	let line  = getline('.')
 	let token = ''
 	let build_stack = 0
 	let token_stack = []
+	let in_bracket  = []
 	while ((index > 0) && (line[index-1] !~ '[ \t;]'))
-		if ((line[index-1] == '.'))
-			call add(token_stack, matchstr(token, '\w\+'))
-			let build_stack = 1
-			let token = ''
-		elseif (build_stack)
-			let token = line[index-1] . token
+		if (index([')', ']', '>'], line[index-1]) > -1)
+			call add(in_bracket, dof#GetMatchingBracketChar(line[index-1]))
+		elseif (index(['(', '[', '<'], line[index-1]) > -1)
+			if (empty(in_bracket))
+				break
+			else
+				call remove(in_bracket, dof#GetMatchingBracketChar(line[index-1]))
+			endif
+		endif
+		if (empty(in_bracket))
+			if ((line[index-1] == '.'))
+				call add(token_stack, matchstr(token, '\w\+'))
+				let build_stack = 1
+				let token = ''
+			elseif (build_stack)
+				let token = line[index-1] . token
+			endif
 		endif
 		let index -= 1
 	endwhile

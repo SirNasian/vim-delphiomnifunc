@@ -62,7 +62,7 @@ function! dof#GetTokenStack()
 	let build_stack = 0
 	let token_stack = []
 	let in_bracket  = []
-	while ((index > 0) && (line[index-1] !~ '[ \t;]'))
+	while (index > 0)
 		if (index([')', ']', '>'], line[index-1]) > -1)
 			call add(in_bracket, dof#GetMatchingBracketChar(line[index-1]))
 		elseif (index(['(', '[', '<'], line[index-1]) > -1)
@@ -73,6 +73,9 @@ function! dof#GetTokenStack()
 			endif
 		endif
 		if (empty(in_bracket))
+			if (line[index-1] =~ '[ \t;]')
+				break
+			endif
 			if ((line[index-1] == '.'))
 				call add(token_stack, matchstr(token, '\w\+'))
 				let build_stack = 1
